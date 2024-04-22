@@ -33,7 +33,18 @@ pip install -r requirements.txt
 Ниже приведены ссылки для скачивания датасета, который использовался для обучения и тестирования данной модели
 
 + Полнаый датасет (собранный из разных источников) : [data](https://drive.google.com/file/d/1l3PUKvHmJQxTsKZiMGdZcjbRBJ568W5J/view?usp=sharing)
-+ Ручной датасет, собранный и размеченный для тестирования ммодели : [data](https://drive.google.com/file/d/1ScHGTILAy5qDzHz9A6-iQJxBpGHUTWRi/view?usp=sharing)
++ Ручной датасет, собранный и размеченный(CVAT) для тестирования модели : [data](https://drive.google.com/file/d/1ScHGTILAy5qDzHz9A6-iQJxBpGHUTWRi/view?usp=sharing)
+
+## Вспомогательные скрипты 
+1. Для подготовки датасета
+ - [xml_to_yolo](https://github.com/PiroJOJO/Potholes_Detection/blob/main/scripts/xml_to_yolo.ipynb) - переводит label из формата xml в yolo формат
+ - [duplicates](https://github.com/PiroJOJO/Potholes_Detection/blob/main/scripts/duplicates.ipynb) - находит/удаляет дубликаты в датасете, основываясь на пороговом значении
+ - [delete_labels](https://github.com/PiroJOJO/Potholes_Detection/blob/main/scripts/delete_labels.ipynb) - удаляет label при отсутствии его изображения
+ - [cutting_of_videos](https://github.com/PiroJOJO/Potholes_Detection/blob/main/scripts/cutting_of_videos.ipynb) - получение определенного количества кадров с видео
+2. Для работы с моделью
+ - [test](https://github.com/PiroJOJO/Potholes_Detection/blob/main/scripts/test.ipynb) - получение метрик с тестовых изображений
+ - [inference](https://github.com/PiroJOJO/Potholes_Detection/blob/main/scripts/inference.ipynb) - получение результата работы модели на тестовых изображениях
+ - [video_inference](https://github.com/PiroJOJO/Potholes_Detection/blob/main/scripts/video_inference.ipynb) - получение результата работы модели на видео
 
 ## Обучение модели 
 
@@ -93,7 +104,7 @@ model.predict('path_to_test/images',
 <img src="https://github.com/PiroJOJO/Potholes_Detection/blob/main/images/results.png"  alt="1" width = 700px height = 360px > 
 
 
-## Результат работы модели
+## Результат работы модели (на тестовых данных)
 
 ---
 
@@ -115,7 +126,8 @@ model.predict('path_to_test/images',
 <img src="https://github.com/PiroJOJO/Potholes_Detection/blob/main/images/labels.jpg"  alt="1" width = 700px height = 560px > 
 
 По результатам обучения и метрикам, полученных с помощью тестовых изображений, можно сделать вывод о полученном датасете.
-+ В тренировочном датасете очень много имеено маленьких боксов, которые чаще всего являются вертикальными (вытянутыми)
-+ Также заметно меньшее количество лежащих боксов в целом
-Следоавтельно, для дальнейшей доработки проекта необходимо найти больше данных именно с ямами, а не трещинами (чтобы уравновесить с числом вытянутых боксов).
-Пограться с агментациями (ресайзить, кропать), чтобы донобрать интересующих кадров.
++ В тренировочном датасете очень много имеено маленьких боксов, поэтому модель плохо реагирует на большие объекты.
++ Также заметно меньшее количество "лежащих" боксов в целом.  
+
+Следоавтельно, для дальнейшей доработки проекта необходимо найти больше данных именно с ямами, а не трещинами (чтобы уравновесить с числом вытянутых боксов) + донобрать при необходимости изображений (если ТЗ допускает возможность доваольно близкую съемку), где требуемые объекты имеют большие боксы .
+Поиграться с агментациями (ресайзить, кропать), чтобы донобрать интересующих кадров.
