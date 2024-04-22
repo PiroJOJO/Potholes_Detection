@@ -17,6 +17,7 @@
 
 ---
 
+Рекомендованная версия Python 3.9.0
 + Клонируйте репозиторий нижеприведенной командой:
 ```
 git clone https://github.com/PiroJOJO/Potholes_Detection
@@ -32,7 +33,7 @@ pip install -r requirements.txt
 
 Ниже приведены ссылки для скачивания датасета, который использовался для обучения и тестирования данной модели
 
-+ Полнаый датасет (собранный из разных источников) : [data](https://drive.google.com/file/d/1l3PUKvHmJQxTsKZiMGdZcjbRBJ568W5J/view?usp=sharing)
++ Полный датасет (собранный из разных источников) : [data](https://drive.google.com/file/d/1l3PUKvHmJQxTsKZiMGdZcjbRBJ568W5J/view?usp=sharing)
 + Ручной датасет, собранный и размеченный(CVAT) для тестирования модели : [data](https://drive.google.com/file/d/1ScHGTILAy5qDzHz9A6-iQJxBpGHUTWRi/view?usp=sharing)
 
 ## Вспомогательные скрипты 
@@ -62,7 +63,7 @@ model = YOLO('yolov8m.pt')
 results = model.train(data='path_to_dataset/data.yaml', epochs=200, imgsz=640, batch=64, patience=50, project=path_to_results)
 ```
 
-## Валидация модели:
+## Валидация модели
 + CLI
 ```
 yolo detect val model=path_to_weights/best.pt imgsz=640 batch=16 conf=0.4 iou=0.3 device='0'
@@ -79,7 +80,7 @@ validation_results = model.val(data='path_to_test/data.yaml',
                                iou=0.3,
                                device='0')
 ```
-## Тестирование модели:
+## Тестирование модели
 + CLI
 ```
 yolo detect predict model=path_to_weights/best.pt source='path_to_test/images'imgsz=640 conf=0.4 iou=0.3
@@ -126,7 +127,7 @@ model.predict('path_to_test/images',
 <img src="https://github.com/PiroJOJO/Potholes_Detection/blob/main/images/labels.jpg"  alt="1" width = 700px height = 560px > 
 
 По результатам обучения и метрикам, полученных с помощью тестовых изображений, можно сделать вывод о полученном датасете.
-+ В тренировочном датасете очень много имеено маленьких боксов, поэтому модель плохо реагирует на большие объекты.
++ В тренировочном датасете очень много именно маленьких боксов, поэтому модель плохо реагирует на большие объекты.
 + Также заметно меньшее количество "лежащих" боксов в целом.  
 
 Следоавтельно, для дальнейшей доработки проекта необходимо найти больше данных именно с ямами, а не трещинами (чтобы уравновесить с числом вытянутых боксов) + донобрать при необходимости изображений (если ТЗ допускает возможность доваольно близкую съемку), где требуемые объекты имеют большие боксы .
